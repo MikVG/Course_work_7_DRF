@@ -1,6 +1,7 @@
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 
 from habits.models import Habit
+from habits.paginators import HabitPaginator
 from habits.serializers import HabitSerializer
 
 
@@ -13,6 +14,7 @@ class HabitListAPIView(ListAPIView):
     """контроллер для отображения списка всех привычек"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
+    pagination_class = HabitPaginator
 
 
 class HabitRetrieveAPIView(RetrieveAPIView):
