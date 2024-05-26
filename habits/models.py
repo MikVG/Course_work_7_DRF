@@ -25,7 +25,8 @@ class Habit(models.Model):
     good_habit = models.BooleanField(default=False, verbose_name='признак приятной привычки')
     related_habit = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
                                       verbose_name='связанная привычка')
-    period = models.CharField(max_length=30, choices=PERIOD_CHOICES, default='weekly', verbose_name='периодичность выполнения')
+    period = models.CharField(max_length=30, choices=PERIOD_CHOICES, default='weekly',
+                              verbose_name='периодичность выполнения')
     award = models.CharField(max_length=150, verbose_name='вознаграждение', null=True, blank=True)
     lead_time = models.IntegerField(verbose_name='время на выполнение')
     is_public = models.BooleanField(default=False, verbose_name='признак публичности')
