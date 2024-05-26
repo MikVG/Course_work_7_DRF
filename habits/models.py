@@ -3,6 +3,7 @@ from django.db import models
 
 
 class Habit(models.Model):
+    """Модель для описания привычки"""
 
     ACTION_CHOICES = [
         ('walk', 'гулять'),
@@ -13,7 +14,7 @@ class Habit(models.Model):
 
     PERIOD_CHOICES = [
         ('two_hours', 'каждые 2 часа'),
-        ('dayly', 'ежедневно'),
+        ('daily', 'ежедневно'),
         ('weekly', 'еженедельно'),
     ]
 
@@ -28,5 +29,12 @@ class Habit(models.Model):
     period = models.CharField(max_length=30, choices=PERIOD_CHOICES, default='weekly',
                               verbose_name='периодичность выполнения')
     award = models.CharField(max_length=150, verbose_name='вознаграждение', null=True, blank=True)
-    lead_time = models.IntegerField(verbose_name='время на выполнение')
+    lead_time = models.IntegerField(verbose_name='время на выполнение секунд')
     is_public = models.BooleanField(default=False, verbose_name='признак публичности')
+
+    class Meta:
+        verbose_name = 'привычка'
+        verbose_name_plural = 'привычки'
+
+    def __str__(self):
+        return f'я буду {self.action} в {self.time} в {self.place}'
