@@ -1,8 +1,5 @@
-
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from rest_framework.generics import RetrieveAPIView, UpdateAPIView, DestroyAPIView
-from rest_framework.routers import DefaultRouter
 
 from habits.apps import HabitsConfig
 from habits.views import HabitCreateAPIView, HabitListAPIView, PublicHabitListAPIView
