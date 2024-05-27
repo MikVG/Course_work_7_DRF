@@ -13,13 +13,13 @@ class Habit(models.Model):
     ]
 
     PERIOD_CHOICES = [
-        ('two_hours', 'каждые 2 часа'),
         ('daily', 'ежедневно'),
+        ('two_days', 'каждые 2 дня'),
         ('weekly', 'еженедельно'),
     ]
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True,
-                              verbose_name='создатель привычки')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
+                             verbose_name='создатель привычки')
     place = models.CharField(max_length=100, verbose_name='место')
     time = models.DateTimeField(verbose_name='время выполнения привычки')
     action = models.CharField(max_length=100, choices=ACTION_CHOICES, verbose_name='действие')
