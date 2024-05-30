@@ -11,9 +11,7 @@ class HabitCreateAPIView(CreateAPIView):
     serializer_class = HabitSerializer
 
     def perform_create(self, serializer):
-        habit = serializer.save()
-        habit.user = self.request.user
-        habit.save()
+        serializer.save(user=self.request.user)
 
 
 class HabitListAPIView(ListAPIView):
@@ -21,14 +19,16 @@ class HabitListAPIView(ListAPIView):
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     pagination_class = HabitPaginator
-    permission_classes = (IsOwner,)
+
+    def get_queryset(self):
+        return Habit.objects.filter(user=self.request.user)
 
 
 class HabitRetrieveAPIView(RetrieveAPIView):
     """контроллер для отображения конкретной привычки"""
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
-    # permission_classes = (IsOwner,)
+    permission_classes = (IsOwner,)
 
 
 class HabitUpdateAPIView(UpdateAPIView):
