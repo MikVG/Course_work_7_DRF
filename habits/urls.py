@@ -1,5 +1,4 @@
 from django.urls import path
-from rest_framework.generics import RetrieveAPIView, UpdateAPIView, DestroyAPIView
 
 from habits.apps import HabitsConfig
 from habits.views import HabitCreateAPIView, HabitListAPIView, PublicHabitListAPIView, HabitRetrieveAPIView, \
