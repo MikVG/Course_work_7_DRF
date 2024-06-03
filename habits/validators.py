@@ -51,3 +51,16 @@ class GoodHabitNotAwardAndRelatedHabitValidator:
         related_habit = dict(value).get(self.related_habit)
         if good_habit and (award or related_habit):
             raise ValidationError("У приятной привычки не может быть вознаграждения или связанной привычки")
+
+
+class RepeatValidator:
+    """Валидатор, который проверяет, что нельзя выполнять привычку реже, чем 1 раз в 7 дней. Хотя для моей модели
+    эта проверка не актуальна, но вне проверку, что период выполнения не соответствует данным из поля выбора
+    заложенные в модели"""
+    def __init__(self, period):
+        self.period = period
+
+    def __call__(self, value):
+        period = dict(value).get(self.period)
+        if period not in ['daily', 'two_days', 'weekly']:
+            raise ValidationError('нельзя выполнять привычку реже, чем 1 раз в 7 дней')
